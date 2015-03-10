@@ -1,0 +1,15 @@
+.base {
+  /*
+   * @base
+   */
+  color: red;
+}
+
+@media (min-width: 480px) {
+    .foo {
+        /*
+         * @use .base
+         */
+        padding: 10px;
+    }
+}

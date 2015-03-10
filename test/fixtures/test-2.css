@@ -1,0 +1,13 @@
+.base {
+  /*
+   * @base
+   */
+  color: red;
+}
+
+.looooooooooooooooooooooooooooooooooooooooooong__selector {
+    /*
+     * @use .base
+     */
+    padding: 10px;
+}

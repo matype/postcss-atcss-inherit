@@ -1,0 +1,9 @@
+@media (min-width: 480px) {
+    .foo {
+        /*
+         * @use .base
+         */
+        padding: 10px;
+        color: red;
+    }
+}
