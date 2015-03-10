@@ -8,8 +8,6 @@ A module for ACSS to inherit other rules
 $ npm install postcss-acss-inherit
 ```
 
-## Example
-
 ## License
 
 The MIT License (MIT)
