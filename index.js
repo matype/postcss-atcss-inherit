@@ -195,9 +195,9 @@ function checkBase (node) {
         children.forEach(function (child) {
             if (child.type === 'comment') text = child.text
         })
-    if (text.match(/\@base/)) return true
+        if (text.match(/\@base/)) return true
     }
-return false
+    return false
 }
 
 function baseRules (root) {
@@ -217,9 +217,9 @@ function checkUse (node) {
         children.forEach(function (child) {
             if (child.type === 'comment') text = child.text
         })
-    if (text.match(/\@use/)) return true
+        if (text.match(/\@use/)) return true
     }
-return false
+    return false
 }
 
 function includeRules (root) {
