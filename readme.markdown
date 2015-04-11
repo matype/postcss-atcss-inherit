@@ -1,11 +1,11 @@
-# postcss-acss-inherit [![Build Status](https://travis-ci.org/morishitter/postcss-acss-inherit.svg)](https://travis-ci.org/morishitter/postcss-acss-inherit)
+# postcss-atcss-inherit [![Build Status](https://travis-ci.org/morishitter/postcss-atcss-inherit.svg)](https://travis-ci.org/morishitter/postcss-atcss-inherit)
 
-A module for ACSS to inherit other rules
+A module for AtCSS to inherit other rules
 
 ## Install
 
 ```shell
-$ npm install postcss-acss-inherit
+$ npm install postcss-atcss-inherit
 ```
 
 ## License

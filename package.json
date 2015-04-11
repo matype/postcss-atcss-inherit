@@ -1,17 +1,17 @@
 {
-  "name": "postcss-acss-inherit",
+  "name": "postcss-atcss-inherit",
   "version": "0.0.1",
-  "description": "A module for ACSS to inherit other rules",
+  "description": "A module for AtCSS to inherit other rules",
   "main": "index.js",
   "scripts": {
     "test": "tape test"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/morishitter/postcss-acss-inherit/git"
+    "url": "git://github.com/morishitter/postcss-atcss-inherit/git"
   },
   "keywords": [
-    "acss"
+    "atcss"
   ],
   "author": "Masaaki Morishita",
   "license": "MIT",
