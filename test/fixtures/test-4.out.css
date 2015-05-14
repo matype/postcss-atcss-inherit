@@ -1,0 +1,14 @@
+.foofoofoofoofoofoofoofoo {
+    /*
+     * @use .base-1
+     */
+    color: red;
+}
+
+.barbarbarbarbarbarbarbar {
+    /*
+     * @use .base-2
+     */
+    color: blue;
+}
+

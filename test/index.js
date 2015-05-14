@@ -13,7 +13,7 @@ function output (name) {
 
 function compare (name) {
     return test(name, function (t) {
-        var res = postcss().use(inherit(fixture(name))).process(fixture(name)).css.trim()
+        var res = postcss().use(inherit()).process(fixture(name)).css.trim()
         t.same(res, output(name))
         t.end()
     })
@@ -22,3 +22,4 @@ function compare (name) {
 compare('test-1')
 compare('test-2')
 compare('test-3')
+compare('test-4')

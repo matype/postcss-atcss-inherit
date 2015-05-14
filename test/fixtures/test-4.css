@@ -1,0 +1,25 @@
+.base-1 {
+    /*
+     * @base
+     */
+    color: red;
+}
+
+.base-2 {
+    /*
+     * @base
+     */
+    color: blue;
+}
+
+.foofoofoofoofoofoofoofoo {
+    /*
+     * @use .base-1
+     */
+}
+
+.barbarbarbarbarbarbarbar {
+    /*
+     * @use .base-2
+     */
+}

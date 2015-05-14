@@ -1,13 +1,16 @@
 var annotation = require('css-annotation')
 
-module.exports = function plugin (css, options) {
+module.exports = function plugin (options) {
+
     options = options || {}
 
-    var annotations = annotation.parse(css)
-
     return function (root) {
-        var matchedRules = []
+        css = options.css !== undefined ? options.css : root;
+        removeCheck = options.removeBase !== undefined ? options.removeBase : true;
 
+        var annotations = annotation.parse(css)
+
+        var matchedRules = []
         root.eachRule(function (node) {
             if (checkUse(node)) {
                 annotations.forEach(function (annotation) {
@@ -97,11 +100,12 @@ module.exports = function plugin (css, options) {
         })
         matchedRules = newMatched
 
+        var includeTmp = []
         matchedRules.forEach(function (matchedRule) {
             if (matchedRule.include) {
                 // include
-                includeTmp = []
                 root.eachRule(function (rule) {
+                    rule.semicolon = true
                     if (checkBase(rule)) {
                         var decls = []
                         rule.nodes.forEach(function (child) {
@@ -124,13 +128,15 @@ module.exports = function plugin (css, options) {
                         rule.nodes.forEach(function (rule) {
                             if (checkUse(rule)) {
                                 includeTmp.forEach(function (tmp) {
-                                    tmp.decls.forEach(function (decl) {
-                                        rule.append({
-                                            prop: decl.prop,
-                                            value: decl.value
+                                    if (tmp.selector === matchedRule.base && matchedRule.use === rule.selector) {
+                                        tmp.decls.forEach(function (decl) {
+                                            rule.append({
+                                                prop: decl.prop,
+                                                value: decl.value
+                                            })
                                         })
-                                    })
-                                    removeBase(root)
+                                        if (removeCheck) removeBase(root)
+                                    }
                                 })
                             }
                         })
@@ -138,13 +144,15 @@ module.exports = function plugin (css, options) {
                     else {
                         if (checkUse(rule)) {
                             includeTmp.forEach(function (tmp) {
-                                tmp.decls.forEach(function (decl) {
-                                    rule.append({
-                                        prop: decl.prop,
-                                        value: decl.value
+                                if (tmp.selector === matchedRule.base && matchedRule.use === rule.selector) {
+                                    tmp.decls.forEach(function (decl) {
+                                        rule.append({
+                                            prop: decl.prop,
+                                            value: decl.value
+                                        })
                                     })
-                                })
-                                removeBase(root)
+                                    if (removeCheck) removeBase(root)
+                                }
                             })
                         }
                     }
