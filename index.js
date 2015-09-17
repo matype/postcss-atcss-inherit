@@ -11,7 +11,7 @@ module.exports = function plugin (options) {
         var annotations = annotation.parse(css)
 
         var matchedRules = []
-        root.eachRule(function (node) {
+        root.walkRules(function (node) {
             if (checkUse(node)) {
                 annotations.forEach(function (annotation) {
                     if (node.selector === annotation.rule) {
@@ -27,7 +27,7 @@ module.exports = function plugin (options) {
                         }
                         else {
                             var lengthMaps = []
-                            root.eachRule(function (rule) {
+                            root.walkRules(function (rule) {
                                 var selLength = rule.selector.length
                                 var declLength = 0
                                 rule.nodes.forEach(function (decl) {
@@ -104,8 +104,8 @@ module.exports = function plugin (options) {
         matchedRules.forEach(function (matchedRule) {
             if (matchedRule.include) {
                 // include
-                root.eachRule(function (rule) {
-                    rule.semicolon = true
+                root.walkRules(function (rule) {
+                    rule.raws.semicolon = true
                     if (checkBase(rule)) {
                         var decls = []
                         rule.nodes.forEach(function (child) {
@@ -161,7 +161,7 @@ module.exports = function plugin (options) {
             }
             else {
                 // extend
-                root.eachRule(function (rule) {
+                root.walkRules(function (rule) {
                     matchedRules.forEach(function (matchedRule) {
                         if (Array.isArray(matchedRule.base)) {
                             matchedRule.base.forEach(function (base) {
@@ -191,12 +191,12 @@ module.exports = function plugin (options) {
 function removeBase (root) {
     root.each(function (rule) {
         if (rule.type === 'rule' && checkBase(rule) && !rule.change) {
-            rule.removeSelf()
+            rule.remove()
         }
         if (rule.type === 'atrule') {
             rule.each(function (node) {
                 if (node.type === 'rule' && checkBase(node)) {
-                    node.removeSelf()
+                    node.remove()
                 }
             })
         }
@@ -217,7 +217,7 @@ function checkBase (node) {
 
 function baseRules (root) {
     var baseRules = []
-    root.eachRule(function (rule) {
+    root.walkRules(function (rule) {
         if (checkBase(rule)) {
             baseRules.push(rule)
         }
@@ -239,7 +239,7 @@ function checkUse (node) {
 
 function includeRules (root) {
     var includeRules = []
-    root.eachRule(function (rule) {
+    root.walkRules(function (rule) {
         if (checkUse(rule)) {
             includeRules.push(rule)
         }
